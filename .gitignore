@@ -1,0 +1,12 @@
+#Visual studio code
+.vscode/
+
+#Jupyters checkpoints
+.ipynb_checkpoints/
+
+#Python
+__pycache__/
+
+#ML agent executables
+
+Banana*
