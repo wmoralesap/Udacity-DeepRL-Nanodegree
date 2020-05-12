@@ -56,3 +56,7 @@ The environment has 4 discrete actions available, corresponding to:
 ### Instructions
 
 Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  
+
+### Credit
+
+The following project was solved using most of the code that was provided by [Udacity's Deep Reinforcement Learning Nanodegree](https://github.com/udacity/deep-reinforcement-learning) for DeepQ Networks.

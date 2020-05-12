@@ -39,8 +39,40 @@ To train the agent, we implemente the DeepQ Learning algorithm developed by Mnih
 In this algorithm we train a predefined neuronal network to predict the value functions from a give state called Local Network. As in bellman equation the actions to estimate the value fuctions of a given state, we need to compute the value functions of the next state. To this end the DeeqQ algorithm estimates the next state value fuction with an identical neuronal network to the local one, called the Target Network. Therefore the update of the local neuronal networks weights is defined as:
 
 
-This Target Network generate the next state value fuctions using the last weights of the local one in the training process for a period of time. After this period the Target weights are updated to the Local ones, and we continue training the Local network. This process is repeated for until the training process end. 
-
+This Target Network generate the next state value fuctions using the last weights of the local one in the training process for a period of time. After this period, the Target weights are updated to the Local ones and we continue training the Local network with the new weights of the target network. This process is repeated until the training process ends. 
 
 To avoid a correlation in the sequence used to train the agent, we implemented experience replay where we store the <img src="http://www.sciweavers.org/tex2img.php?eq=%28S%2CA%2CR%2CS%27%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="(S,A,R,S')" width="93" height="19" /> tuples in a replay buffer and sample from it a random sequence. Therefore, the DeepQ Learning with Expirience Replay algorithm follows the following pseudo-code:
 
+
+In this implementation, the algorithm continued training the agent until we reached a end criteria or until we trained for 2000 episodes. This end criteria was reached when the average reward of 100 continues episode was greater than 16.
+
+### Neuronal Network
+
+To estimate the value fuction from a given state we use a Neuronal Network composed with only fully conected hidden layers with RELU activation functions and ending with layer with softmax activation function.
+
+
+
+### Hyperparameters
+
+The agent is trained with the following hyperparameters:
+
+- **`Batch size`**  =  64 
+- **`Gamma`**  =  0.99
+- **`TAU`**  =  1e-3
+- **`Learning Rate`**  =  5e-4
+- **`Steps per update`**  =  4
+- **`Start Epsilon`**  = 1.0
+- **`End Epsilon`**  = 0.01
+- **`Epsilon Decay`**  = 0.995
+
+
+## Result
+
+The following figure shows the reward obtained in each episode while training the agent.
+
+
+As it can be seen, the agent reached the end criteria after 897 episodes, with an reward 100 episode average reward of 16.01.
+
+## Improvements
+
+Although we trained an agent to play in the current enviroment with a good average reward per episode, there is still room for improvements. Concretely, we could extract the image of the environment and Dueling Q Networks to get a better performance of the agent. Also we could use Importance Sampling instead of random sampling to learn from action-state pairs that are less probably to happen in the current environment.
