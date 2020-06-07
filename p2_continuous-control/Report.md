@@ -12,11 +12,11 @@ The environment consisted in a open world with `20` arm like objects scattered a
 
 ### Action Space
 
-Each agent of the environment contents a four dimensional continous action space corresponding to the torque applicable to the two joints of each arm. In this case, the range of each action space is between `-1` and `1`. As this environment consist of `20` agents. The action space is a matrix of `20`x`4`
+Each agent of the environment contents a four dimensional continous action space corresponding to the torque applicable to the two joints of each arm. In this case, the range of each action space is between `-1` and `1`. As this environment consist of `20` agents. The action space is a matrix of (`20`,`4`)
 
 ### State Space
 
-Each agent of the environment has a continous `33` dimensional state space corresponding to the position, rotation, velocity, and angular velocities of the arm of each agent. As this environment consist of `20` agents. The state space is a matrix of `20`x`33`
+Each agent of the environment has a continous `33` dimensional state space corresponding to the position, rotation, velocity, and angular velocities of the arm of each agent. As this environment consist of `20` agents. The state space is a matrix of (`20`,`33`)
 
 ## Method
 
@@ -28,7 +28,7 @@ To train the agent, we implemente the Deep Deterministic Policy Gradient (DDPG) 
 
 This algorithm is a actor-critic method where we train a `2` predefined neuronal networks (actor and critic) to act according to the current states and solved a task. In these methods the critic is in charge to estimate the value function of the given state that is used by the actor to learn and predict the best action. As in DQN, we will have two identical neuronal networks to the actor and the critic that will calculate the targets that agent will learn.
 
-This Actor-Critic Target Networks will generate the target values using the last weights of the Actor-Critic Local Networks in the training process for a period of time. After this period, the Targets weights are updated with the Local ones and we continue training the Local networks with the new weights of the target networks. This process is repeated until the training process ends. 
+This Actor-Critic Target Networks will generate the target using the last weights of the Local Networks for a period of time. After this period has finished, the Targets weights are updated with the weights of the local networks in that time step, and then the learning process of the local networks is ranudated with the new parameters of the Targets networks. This process is repeated periodically until the training process is finished. 
 
 To avoid a correlation in the sequence used to train the agent, we implemented experience replay where we store the **`(State, Action, Reward, Next_State)`** tuples in a replay buffer and sample from it a random sequence. Therefore, the DDPG Learning with Experience Replay algorithm follows the following pseudo-code:
 
@@ -36,13 +36,21 @@ To avoid a correlation in the sequence used to train the agent, we implemented e
     <img src="https://user-images.githubusercontent.com/27258035/83956363-87ae6680-a85d-11ea-8750-5a4549f24c8a.png" width="400"/>
 </p>
 
-NOISE TODO
+We use the Ornstein-Uhlenbeck process to add some variance to the actions of the agents. As in this implementation has `20` agents acting in the environment, the Ornstein-Uhlenbeck class was modified so the output of sampling from it has a size of (`num of agents`,`action size`).
 
-In this implementation, we trained `10` times every `20` time steps with a batch size of `128` expiriences. Finally we continued training the agent until the average reward of `100` continues episode was greater than `30` or until we reach `2000` episodes.
+In this implementation, we trained `10` times after every `20` time steps with a batch size of `128` expiriences. Finally we continued training the agent until the average reward of `100` continues episode was greater than `30` or until we reach `2000` episodes.
 
 ### Neuronal Network
 
-TODO
+As explained before DDPG is an Actor-Critic method, therefore we had to define two different Neuronal Networks for both the actor and the critic.
+
+#### Actor
+
+For the actor we decided to implement a fully connected network with `2` hidden layers of `128` units each one and a batch normalization layer after the first hidden layer. As activation, we use the Relu function after the batch normalization layer and after the second hidden layer. Finally the tanh function was selected as activation function of the output layer.
+
+#### Critic
+
+For the actor we decided to implement a fully connected network with `2` hidden layers and a batch normalization layer after the one. The first layer was implemented with `128` units, and the second one with `128` + `4` (action size) units. As activation, we use the Relu function after the batch normalization layer and after the second hidden layer.
 
 ### Hyperparameters
 
@@ -72,4 +80,4 @@ As it can be seen, the agent reached the end criteria after **`220`**  episodes,
 
 ## Improvements
 
-TODO
+To improve this implementation, we should try to use a Generalized Advantage Estimiation (e.g Lambda Return), as in the current state of this algorithm we only use a TD bootstraping of one step.
