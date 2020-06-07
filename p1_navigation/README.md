@@ -17,11 +17,11 @@ This folder contains my solution for Udacity's Deep Reinfrocement Learning Nanod
 
 The environment consist on a square platform where an agent must learn to collect as many yellow bananas while avoiding blue bananas. The agent must learn the best policy so it can choose the appropiate action to maximize the amount of yellow bananas collected at the end of each episode.
 
-#### State Space
+### State Space
 
 The environment has a continous 37 dimensional state space corresponding to the agent's speed and a raycast based perception of objects around the agent.
 
-#### Action Space
+### Action Space
 
 The environment has 4 discrete actions available, corresponding to:
 
@@ -30,16 +30,16 @@ The environment has 4 discrete actions available, corresponding to:
 - **`2`** - turn left.
 - **`3`** - turn right.
 
-#### Rewards
+### Rewards
 
 - `+1` for each **yellow** banana collected by the agent
 - `-1` for each **blue** banana collected by the agent
 
-### Getting Started
+## Getting Started
 
 **Please make sure that you followed the instalation instructions in [Udacity-DeepRL-Nanodegree](https://github.com/wmoralesap/Udacity-DeepRL-Nanodegree)**
 
-#### Download Unity Environment
+### Download Unity Environment
 
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
     - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
@@ -53,10 +53,10 @@ The environment has 4 discrete actions available, corresponding to:
 
 2. Place the file in the current GitHub repository, in the `p1_navigation/` folder, and unzip (or decompress) the file. 
 
-### Instructions
+## Instructions
 
 Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  
 
-### Credit
+## Credit
 
 The following project was solved using most of the code that was provided by [Udacity's Deep Reinforcement Learning Nanodegree](https://github.com/udacity/deep-reinforcement-learning) for DeepQ Networks.

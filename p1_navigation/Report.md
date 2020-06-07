@@ -36,13 +36,13 @@ This section discuss the implemented algorithm to train the smart agent.
 
 To train the agent, we implemente the DeepQ Learning algorithm developed by Mnih' *et al* in Google's Mind [paper](https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf).
 
-In this algorithm we train a predefined neuronal network to predict the value functions from a give state called Local Network. As in bellman equation the actions to estimate the value fuctions of a given state, we need to compute the value functions of the next state. To this end the DQN algorithm estimates the next state value fuction with an identical neuronal network to the local one, called the Target Network. Therefore the update of the local neuronal networks weights is defined as:
+In this algorithm we train a predefined neuronal network to predict the value functions from a give state called Local Network. As in bellman equation, we need to compute the value functions of the next state that will serve as target to learn the optimal value function of a given state. To this end the DQN algorithm estimates the next state value fuction with an identical neuronal network to the local one, called the Target Network. Therefore the update of the local neuronal networks weights is defined as:
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/27258035/83926222-962b4e00-a789-11ea-8fb2-25393b948601.PNG" width="400"/>
 </p>
 
-This Target Network generate the next state value fuctions using the last weights of the local one in the training process for a period of time. After this period, the Target weights are updated to the Local ones and we continue training the Local network with the new weights of the target network. This process is repeated until the training process ends. 
+This Target Network generate the next state value fuctions using the last weights of the local one in the training process for a period of time. After this period, the target weights are updated with the Local ones and we continue training the Local network with the new weights of the target network. This process is repeated until the training process ends. 
 
 To avoid a correlation in the sequence used to train the agent, we implemented experience replay where we store the **`(State, Action, Reward, Next_State)`** tuples in a replay buffer and sample from it a random sequence. Therefore, the DeepQ Learning with Experience Replay algorithm follows the following pseudo-code:
 
@@ -50,7 +50,7 @@ To avoid a correlation in the sequence used to train the agent, we implemented e
     <img src="https://user-images.githubusercontent.com/27258035/83926095-2b7a1280-a789-11ea-9860-51f12fecd08e.png" width="600"/>
 </p>
 
-In this implementation, we sample the memory every `4` steps with a batch size of `64` expiriences. Finally we continued training the agent until the average reward of `100` continues episode was greater than `16` or until we reach `2000` episodes.
+In this implementation, we train every `4` steps with a batch size of `64` expiriences. Finally we continued training the agent until the average reward of `100` continues episode was greater than `16` or until we reach `2000` episodes.
 
 ### Neuronal Network
 

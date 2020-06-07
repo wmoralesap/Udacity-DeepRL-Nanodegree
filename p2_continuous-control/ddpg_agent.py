@@ -154,7 +154,7 @@ class OUNoise:
         self.sigma = sigma
         self.seed = random.seed(seed)
         self.reset()
-
+        
     def reset(self):
         """Reset the internal state (= noise) to mean (mu)."""
         self.state = copy.copy(self.mu)
