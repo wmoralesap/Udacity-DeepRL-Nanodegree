@@ -8,6 +8,7 @@ In this repository you can find several reinforcement learning projects. This pr
 
 * [Project 1: Navigation](https://github.com/wmoralesap/Udacity-DeepRL-Nanodegree/p1_navigation)
 * [Project 2: Continous Control](https://github.com/wmoralesap/Udacity-DeepRL-Nanodegree/p2_continuous-control)
+* [Project 2: Continous Control](https://github.com/wmoralesap/Udacity-DeepRL-Nanodegree/p2_collab-compet)
 
 ## Dependencies
 

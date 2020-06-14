@@ -4,7 +4,7 @@ This is the report for the second project in the Udacity's Deep Reinforcement Le
 
 ## Continous Contronl
 
-The given task was to program `20` smart agents that has to articulate an arm like object to maximaze the time steps that then tip of the object stays in a desired location. This section discusses the details of the environment where the agents is trained.
+The given task was to program `20` smart agents that has to articulate an arm like object to maximaze the time steps that then tip of the object stays in a desired location. This section discusses the details of the environment where the agents are trained.
 
 ### Environment
 
@@ -16,7 +16,7 @@ Each agent of the environment contents a four dimensional continous action space
 
 ### State Space
 
-Each agent of the environment has a continous `33` dimensional state space corresponding to the position, rotation, velocity, and angular velocities of the arm of each agent. As this environment consist of `20` agents. The state space is a matrix of (`20`,`33`)
+Each agent of the environment has a continous `33` dimensional state space corresponding to the position, rotation, velocity, and angular velocities of the arm of each agent. As this environment consist of `20` agents, the state space is a matrix of (`20`,`33`)
 
 ## Method
 
@@ -28,7 +28,7 @@ To train the agent, we implemente the Deep Deterministic Policy Gradient (DDPG) 
 
 This algorithm is a actor-critic method where we train a `2` predefined neuronal networks (actor and critic) to act according to the current states and solved a task. In these methods the critic is in charge to estimate the value function of the given state that is used by the actor to learn and predict the best action. As in DQN, we will have two identical neuronal networks to the actor and the critic that will calculate the targets that agent will learn.
 
-This Actor-Critic Target Networks will generate the target using the last weights of the Local Networks for a period of time. After this period has finished, the Targets weights are updated with the weights of the local networks in that time step, and then the learning process of the local networks is ranudated with the new parameters of the Targets networks. This process is repeated periodically until the training process is finished. 
+This Actor-Critic Target Networks will generate the target using the last weights of the Local Networks for a period of time. After this period has finished, the Targets weights are updated with the weights of the local networks in that time step, and then the learning process of the local networks is reanudated with the new parameters of the Targets networks. This process is repeated periodically until the training process is finished. 
 
 To avoid a correlation in the sequence used to train the agent, we implemented experience replay where we store the **`(State, Action, Reward, Next_State)`** tuples in a replay buffer and sample from it a random sequence. Therefore, the DDPG Learning with Experience Replay algorithm follows the following pseudo-code:
 
